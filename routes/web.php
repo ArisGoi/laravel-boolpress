@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Rotte pubbliche
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PageController@index');
 
 // Rotte Autenticazione
 Auth::routes();
