@@ -82,6 +82,7 @@
             <div class="content">
                 <div class="title m-b-md">
                     Laravel
+                    <a href="{{route('blog.index')}}"><h1>BLOG</h1></a>
                 </div>
 
                 <div class="links">

@@ -40,7 +40,7 @@
     <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex">
         <a class="p-2" href="#">Homepage</a>
-        <a class="p-2" href="#">Blog</a>
+        <a class="p-2" href="{{route('blog.index')}}">Blog</a>
         </nav>
     </div>
 

@@ -10,7 +10,8 @@
 
         @foreach ($posts as $post)    
             <div class="blog-post">
-                <h2 class="blog-post-title"><a href="{{route("posts.show"), $post["slug"]}}">{{$post['title']}}</a></h2>
+                {{-- <h2 class="blog-post-title"><a href="/blog/{{$post['slug']}}">{{$post['title']}}</a></h2> --}}
+                <h2 class="blog-post-title"><a href="{{route('single-post.show', $post['slug'])}}">{{$post['title']}}</a></h2>
                 <p class="blog-post-meta">{{$post->created_at->diffForHumans()}}</p>
                 <p>
                     {{$post['content']}}
