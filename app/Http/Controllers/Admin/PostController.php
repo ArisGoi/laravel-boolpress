@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str; //importiamo per generare lo slug
 use App\Post;
 
 class PostController extends Controller
@@ -27,7 +28,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -38,7 +39,35 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validation
+        $request->validate([
+            'title' => 'string|required|max:100',
+            'content' => 'string|required'
+        ]);
+
+        // Insert
+        $newPost = new Post(); //crea un nuovo oggetto Post
+        $newPost->fill($request->all()); //filla il $newPost con i dati della request
+
+        $slug = Str::of($request->title)->slug('-'); //genera lo slug
+
+        $postExist = Post::where('slug', $slug)->first(); //cerca nel DB se esiste un post con lo stesso slug
+        $count = 2; //il count parte da 2
+        while ($postExist){ //se esiste un post con lo stesso slug $postExist risulta vero e entriamo nel while
+            $slug = $slug . "-" . $count; //unisco slug e count
+
+            $postExist = Post::where('slug', $slug)->first(); //controllo di nuovo se esiste un post con lo stesso slug
+
+            $count++; //aumento il contatore
+        }
+
+        $newPost->slug = $slug; //inserisce lo slug in $newPost
+        $newPost->save(); //pusha nel database
+
+        // Post::create($request->all()); -- non si usa xk abbiamo già $newPost->save();
+
+        // Redirect
+        return redirect()->route('admin.posts.index')->with('success', "il post è stato creato");;
     }
 
     /**
@@ -58,9 +87,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -70,9 +99,34 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        // Validation
+        $request->validate([
+            'title' => 'string|required|max:100',
+            'content' => 'string|required'
+        ]);
+
+        if($post->title != $request->title){
+            $slug = Str::of($request->title)->slug('-'); //genera lo slug
+
+            $postExist = Post::where('slug', $slug)->first(); //cerca nel DB se esiste un post con lo stesso slug
+            $count = 2; //il count parte da 2
+            while ($postExist){ //se esiste un post con lo stesso slug $postExist risulta vero e entriamo nel while
+                $slug = $slug . "-" . $count; //unisco slug e count
+
+                $postExist = Post::where('slug', $slug)->first(); //controllo di nuovo se esiste un post con lo stesso slug
+
+                $count++; //aumento il contatore
+            }
+            $post->slug = $slug; //inserisce lo slug in $newPost
+        }
+
+        $post->fill($request->all());
+        $post->save();
+
+        //redirect
+        return redirect()->route('admin.posts.show', $post->id)->with('success', "il post {$post['id']} è stato aggiornato");;
     }
 
     /**

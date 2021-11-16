@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Rotte pubbliche
-Route::get('/', 'PageController@index');
+Route::get('/', 'PageController@index')->name('home');
 Route::get('/blog', 'PostController@index')->name('blog.index');
 Route::get('/blog/{slug}', 'PostController@show')->name('single-post.show');
 

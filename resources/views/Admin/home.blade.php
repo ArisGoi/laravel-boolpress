@@ -16,6 +16,7 @@
 
                     <ul>
                         <li><a href="{{route('admin.posts.index')}}">Visualizza tutti i Post</a></li>
+                        <li><a href="{{route('admin.posts.create')}}">Crea un Post</a></li>
                     </ul>
                 </div>
             </div>

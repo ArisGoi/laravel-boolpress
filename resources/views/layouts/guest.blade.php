@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.1/assets/img/favicons/favicon.ico">
 
-    <title>Blog Template for Bootstrap</title>
+    <title>Blog BoolPress</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.1/examples/blog/">
 
@@ -29,17 +29,17 @@
             {{-- <a class="text-muted" href="#">Subscribe</a> --}}
         </div>
         <div class="col-4 text-center">
-            <a class="blog-header-logo text-dark" href="#">BoolPress</a>
+            <a class="blog-header-logo text-dark" href="{{route('home')}}">BoolPress</a>
         </div>
         <div class="col-4 d-flex justify-content-end align-items-center">
-            <a class="btn btn-sm btn-outline-secondary" href="#">Admin</a>
+            <a class="btn btn-sm btn-outline-secondary" href="{{route('admin.home')}}">Admin</a>
         </div>
         </div>
     </header>
 
     <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex">
-        <a class="p-2" href="#">Homepage</a>
+        <a class="p-2" href="{{route('home')}}">Homepage</a>
         <a class="p-2" href="{{route('blog.index')}}">Blog</a>
         </nav>
     </div>
