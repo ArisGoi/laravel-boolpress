@@ -22,10 +22,21 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+            <div class="container navbar-nav">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{-- {{ config('app.name', 'Laravel') }} --}}
                     Guest Homepage
+                </a>
+                <a class="nav-item nav-link" href="{{ route('admin.posts.index') }}">
+                    Tutti i post
+                </a>
+                <a class="nav-item nav-link" href="{{ route('admin.posts.create') }}">
+                    Crea un Post
+                </a>
+                <a class="nav-item nav-link" href="{{ route('admin.categories.index') }}"> {{-- TODO: Cambiare la rotta--}}
+                    Tutte le Categorie
+                </a>
+                <a class="nav-item nav-link" href="{{ route('admin.categories.create') }}"> {{-- TODO: Cambiare la rotta--}}
+                    Crea una Categoria
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

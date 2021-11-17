@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Rotte pubbliche
-Route::get('/', 'PageController@index')->name('home');
+Route::get('/', 'PostController@index')->name('home'); //pageController@index
 Route::get('/blog', 'PostController@index')->name('blog.index');
 Route::get('/blog/{slug}', 'PostController@show')->name('single-post.show');
 
@@ -26,4 +26,5 @@ Route::middleware('auth')->namespace('Admin')->name('admin.')->prefix('admin')->
 
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('posts', 'PostController');
+    Route::resource('categories', 'CategoryController');
 });

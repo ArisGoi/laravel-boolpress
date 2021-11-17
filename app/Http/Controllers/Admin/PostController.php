@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str; //importiamo per generare lo slug
 use App\Post;
+use App\Category;
 
 class PostController extends Controller
 {
@@ -28,7 +29,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Category::all();
+
+        return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -42,7 +45,8 @@ class PostController extends Controller
         // Validation
         $request->validate([
             'title' => 'string|required|max:100',
-            'content' => 'string|required'
+            'content' => 'string|required',
+            'category_id' => 'nullable|exists:categories,id'
         ]);
 
         // Insert
@@ -89,7 +93,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+        $categories = Category::all();
+
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -104,7 +110,8 @@ class PostController extends Controller
         // Validation
         $request->validate([
             'title' => 'string|required|max:100',
-            'content' => 'string|required'
+            'content' => 'string|required',
+            'category_id' => 'nullable|exists:categories,id'
         ]);
 
         if($post->title != $request->title){

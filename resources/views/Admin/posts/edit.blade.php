@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container col-md-6">
-        <h1>Crea un post</h1>
+        <h1>Modifica un post</h1>
         <form action="{{route('admin.posts.update', $post['id'])}}" method="POST">
             @csrf
             @method('put')
@@ -17,6 +17,18 @@
                 <label for="content">Contenuto</label>
                 <textarea name="content" class="form-control @error('content') is-invalid @enderror" id="content" cols="30" rows="10" placeholder="Inserisci del contenuto...">{{old('content') ?? $post['title']}}</textarea>
                 @error('content')
+                    <div class="alert alert-danger">{{$message}}</div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="category_id">Categoria</label>
+                <select name="category_id" id="category_id" class="form-control" @error('category') is-invalid @enderror>
+                    <option value="">-- Nessuna Categoria --</option>
+                    @foreach ($categories as $category)
+                        <option value="{{$category['id']}}">{{$category['name']}}</option>
+                    @endforeach
+                </select>
+                @error('category_id')
                     <div class="alert alert-danger">{{$message}}</div>
                 @enderror
             </div>
