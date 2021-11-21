@@ -26,18 +26,41 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Guest Homepage
                 </a>
-                <a class="nav-item nav-link" href="{{ route('admin.posts.index') }}">
-                    Tutti i post
-                </a>
-                <a class="nav-item nav-link" href="{{ route('admin.posts.create') }}">
-                    Crea un Post
-                </a>
-                <a class="nav-item nav-link" href="{{ route('admin.categories.index') }}"> {{-- TODO: Cambiare la rotta--}}
-                    Tutte le Categorie
-                </a>
-                <a class="nav-item nav-link" href="{{ route('admin.categories.create') }}"> {{-- TODO: Cambiare la rotta--}}
-                    Crea una Categoria
-                </a>
+                {{-- Dropdown Posts --}}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Post
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('admin.posts.index') }}">Visualizza i Post</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ route('admin.posts.create') }}">Crea Post</a>
+                    </div>
+                </li>
+                {{-- Dropdown Categorie --}}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categorie
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('admin.categories.index') }}">Visualizza Categorie</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ route('admin.categories.create') }}">Crea Categoria</a>
+                    </div>
+                </li>
+
+                {{-- Dropdown Tags --}}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tags
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Visualizza Tags</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Crea Tag</a>
+                    </div>
+                </li>
+                
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

@@ -17,6 +17,12 @@
                     <ul>
                         <li><a href="{{route('admin.posts.index')}}">Visualizza tutti i Post</a></li>
                         <li><a href="{{route('admin.posts.create')}}">Crea un Post</a></li>
+                        <div class="dropdown-divider"></div>
+                        <li><a href="{{route('admin.categories.index')}}">Visualizza tutte le Categorie</a></li>
+                        <li><a href="{{route('admin.categories.create')}}">Crea una Categoria</a></li>
+                        <div class="dropdown-divider"></div>
+                        <li><a href="#">Visualizza tutti i Tags</a></li>
+                        <li><a href="#">Crea un Tags</a></li>
                     </ul>
                 </div>
             </div>
