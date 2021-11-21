@@ -11,6 +11,12 @@ use App\Tag;
 
 class PostController extends Controller
 {
+    protected $validationRules = [
+        'title' => 'string|required|max:100',
+        'content' => 'string|required',
+        'category_id' => 'nullable|exists:categories,id',
+        'tags' => 'exists:tags,id',
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -45,11 +51,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         // Validation
-        $request->validate([
-            'title' => 'string|required|max:100',
-            'content' => 'string|required',
-            'category_id' => 'nullable|exists:categories,id'
-        ]);
+        $request->validate($this->validationRules);
 
         // Insert
         $newPost = new Post(); //crea un nuovo oggetto Post
@@ -71,6 +73,8 @@ class PostController extends Controller
         $newPost->save(); //pusha nel database
 
         // Post::create($request->all()); -- non si usa xk abbiamo già $newPost->save();
+
+        $newPost->tags()->attach($request->tags);
 
         // Redirect
         return redirect()->route('admin.posts.index')->with('success', "il post è stato creato");;
@@ -96,8 +100,9 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('admin.posts.edit', compact('post', 'categories'));
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -110,11 +115,7 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         // Validation
-        $request->validate([
-            'title' => 'string|required|max:100',
-            'content' => 'string|required',
-            'category_id' => 'nullable|exists:categories,id'
-        ]);
+        $request->validate($this->validationRules);
 
         if($post->title != $request->title){
             $slug = Str::of($request->title)->slug('-'); //genera lo slug
@@ -133,6 +134,8 @@ class PostController extends Controller
 
         $post->fill($request->all());
         $post->save();
+
+        $post->tags()->sync($request->tags);
 
         //redirect
         return redirect()->route('admin.posts.show', $post->id)->with('success', "il post {$post['id']} è stato aggiornato");;
