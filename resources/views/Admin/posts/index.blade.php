@@ -23,6 +23,7 @@
                                 <th scope="col">Title</th>
                                 <th scope="col">Slug</th>
                                 <th scope="col">Category</th>
+                                <th scope="col">Tags</th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
@@ -33,6 +34,11 @@
                                 <td>{{$post["title"]}}</td>
                                 <td>{{$post["slug"]}}</td>
                                 <td>{{$post['category']['name'] ?? "" }}</td>
+                                <td>
+                                    @foreach ($post['tags'] as $ptag)
+                                        {{$ptag['name']}},
+                                    @endforeach
+                                </td>
                                 {{-- Actions --}}
                                 <td>
                                     <a href="{{route('admin.posts.show', $post['id'])}}">
