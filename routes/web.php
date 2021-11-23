@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'PostController@index')->name('home'); //pageController@index
 Route::get('/blog', 'PostController@index')->name('blog.index');
 Route::get('/blog/{slug}', 'PostController@show')->name('single-post.show');
+Route::get('/vue-blog', 'VueController@index')->name('vue-blog.index');
 
 // Rotte Autenticazione
 Auth::routes();
